@@ -1,0 +1,137 @@
+﻿body {
+    background-color: yellow;
+    -webkit-touch-callout:none;
+-webkit-user-select:none;
+-khtml-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+user-select:none;
+}
+.MainScrren
+{
+    border: 1px solid #000000;
+    height:399px;
+    margin-top:10px;
+    background-color:white;
+    width:300px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.main
+{
+    width:350px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.MainScrren .Left{
+    border-right: 1px solid #000000;
+    width:199px;
+    height:399px;
+}
+.SysButton
+{
+    margin-top:10px;
+}
+.SysButton .btnfont
+{
+    float:left;
+    width:82PX;
+}
+.SysButton .btnfont div
+{
+    text-align:center;
+}
+.SysButton .btnfont .SysButton_btn
+{
+    margin-left:25px;
+    display:block;
+    width:30PX;
+    height:30PX;
+    float:left;
+    border-radius:15px;
+    background-color:blue;
+    -moz-border-radius:15px; /* 老的 Firefox */
+    -webkit-border-radius: 15px; 
+}
+.ControlButton {
+   width:350px;
+   margin-top:10px;
+}
+
+.ControlButton .LeftControl
+{
+    width:230px;
+    float:left;
+}
+.ControlButton .LeftControl .control_btn
+{
+    display:block;
+    width:50px;
+    height:50px;
+    border-radius:25px;
+    background-color:blue;
+    -moz-border-radius:25px; /* 老的 Firefox */
+    -webkit-border-radius: 25px; 
+}
+.ControlButton .LeftControl .Top_btn
+{
+    padding-left:78px;
+}
+.ControlButton .LeftControl .Left_btn
+{
+    float:left;
+    padding-left:30px;
+}
+.ControlButton .LeftControl .Right_btn
+{
+    float:left;
+    padding-left:47px;
+}
+.ControlButton .LeftControl .Bottom_btn
+{
+    padding-left:78px;
+    clear:both;
+}
+.RightControl
+{
+    width:80px;
+    float:left;
+    padding-top:35px;
+}
+.RightControl .Change_btn
+{
+    display:block;
+    width:80px;
+    height:80px;
+    border-radius:40px;
+    background-color:blue;
+    -moz-border-radius:40px; /* 老的 Firefox */
+    -webkit-border-radius: 40px; 
+}
+.unit{
+    width:19px;
+    height:19px;
+    float:left;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+}
+.lastunit{
+    width:19px;
+    height:19px;
+    float:left;
+    border-bottom: 1px solid #808080;
+}
+.botunit{
+    width:19px;
+    height:19px;
+    float:left;
+    border-right: 1px solid #808080;
+}
+.botlastunit{
+    width:19px;
+    height:19px;
+    float:left;
+}
+.black{
+   background-color:black;
+}

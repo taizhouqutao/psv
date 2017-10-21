@@ -1,0 +1,67 @@
+﻿<%@ Page Language="C#" Inherits="psv.Default" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+	<title>俄罗斯方块机</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <link href="Style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="MobileOptimized" content="350">
+    <script src="jquery-3.2.1.min.js"/>
+	<script src="Global.js"/>
+</head>
+<body>
+	<form id="form1" runat="server">
+    <div class="main">
+        <div class="MainScrren">
+            <div class="Left">
+                <div id="ShowPart">
+                </div>
+            </div>
+            <div class="Right"></div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="SysButton">
+            <div class="btnfont">
+                <div>S/P</div>
+                <a class="SysButton_btn" href="javascript:SP()"></a>
+            </div>
+            <div class="btnfont">
+                <div>On/Off</div>
+                <a class="SysButton_btn" href="javascript:OnOff()"></a>
+            </div>
+            <div class="btnfont">
+                <div>Sound</div>
+                <a class="SysButton_btn" href="javascript:Sound()"></a>
+            </div>
+            <div class="btnfont">
+                <div>Reset</div>
+                <a class="SysButton_btn" href="javascript:Reset()"></a>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="ControlButton">
+            <div class="LeftControl">
+                <div class="Top_btn">
+                    <a class="control_btn" id="Top_btn" ></a>
+                </div>
+                <div class="Left_btn">
+                    <a class="control_btn" id="Left_btn"></a>
+                </div>
+                <div class="Right_btn">
+                    <a class="control_btn" id="Right_btn"></a>
+                </div>
+                <div class="Bottom_btn">
+                    <a class="control_btn" id="Bottom_btn"></a>
+                </div>
+            </div>
+            <div class="RightControl">
+                <a class="Change_btn" id="Change_btn"></a>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+	</form>
+</body>
+</html>
