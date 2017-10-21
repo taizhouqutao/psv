@@ -118,7 +118,7 @@ function TankV1TurnRight(Tank) {
     FaillTankV1Array();
 }
 function TankV1MoveRight(Tank) {
-    if(Tank.Postion[1]<9)
+    if(Tank.Postion[1]<8)
     {
         Tank.Postion[1]=Tank.Postion[1]+1;
     }
@@ -140,9 +140,9 @@ function TankV1TurnBottom(Tank) {
     FaillTankV1Array();
 }
 function TankV1MoveBottom(Tank) {
-    if(Tank.Postion[0]<19)
+    if(Tank.Postion[0]<18)
     {
-        Tank.Postion[0]=Tank.Postion[0]-1;
+        Tank.Postion[0]=Tank.Postion[0]+1;
     }
     FaillTankV1Array();
 }
