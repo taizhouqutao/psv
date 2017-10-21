@@ -5,7 +5,8 @@ function TankV1Main() {
         Arm: "top",
         FirePostion: [-1, -1],
         FireSpead: 40,
-        TankSpead: 50
+        TankSpead: 50,
+        MyTankOpenFireInt:-1
     }
     FaillTankV1Array();
 }
@@ -54,7 +55,6 @@ function FaillTankV1Array()
     Clean(_TheArray);
     /*填充我的坦克*/
     FaillTankV1obj(MyTankV1);
-
     ShowScreen(_TheArray);
 }
 
@@ -143,6 +143,97 @@ function TankV1MoveBottom(Tank) {
     if(Tank.Postion[0]<18)
     {
         Tank.Postion[0]=Tank.Postion[0]+1;
+    }
+    FaillTankV1Array();
+}
+function TankV1Change()
+{
+    MyTankV1Fire(MyTankV1);
+}
+function MyTankV1Fire(Tank) {
+    if(Tank.FirePostion[0]<0) {
+        if(Tank.Arm=="top") {
+            if((Tank.Postion[0]-1)>0) {
+                Tank.FirePostion[0] = (Tank.Postion[0]-1) - 1;
+                Tank.FirePostion[1] = Tank.Postion[1];
+                FaillTankV1Array();
+                Tank.MyTankOpenFireInt = setInterval("MyTankV1MoveFire('top')", Tank.FireSpead)
+            }
+        }
+        else if(Tank.Arm=="left") {
+            if((Tank.Postion[1]-1)>0) {
+                Tank.FirePostion[0] = Tank.Postion[0];
+                Tank.FirePostion[1] = (Tank.Postion[1]-1)-1;
+                FaillTankV1Array();
+                Tank.MyTankOpenFireInt = setInterval("MyTankV1MoveFire('left')", Tank.FireSpead)
+            }
+        }
+        else if(Tank.Arm=="right") {
+            if((Tank.Postion[1]+1)<9) {
+                Tank.FirePostion[0] = Tank.Postion[0];
+                Tank.FirePostion[1] = (Tank.Postion[1]+1)+1;
+                FaillTankV1Array();
+                Tank.MyTankOpenFireInt = setInterval("MyTankV1MoveFire('right')", Tank.FireSpead)
+            }
+        }
+        else if(Tank.Arm=="bottom") {
+            if((Tank.Postion[0]+1)<19) {
+                Tank.FirePostion[0] = (Tank.Postion[0]+1)+1;
+                Tank.FirePostion[1] = Tank.Postion[1];
+                FaillTankV1Array();
+                Tank.MyTankOpenFireInt = setInterval("MyTankV1MoveFire('bottom')", Tank.FireSpead)
+            }
+        }
+    }
+}
+function MyTankV1MoveFire(Arm) {
+    if(Arm=="top")
+    {
+        if(MyTankV1.FirePostion[0]>0)
+        {
+            MyTankV1.FirePostion[0]=MyTankV1.FirePostion[0]-1;
+        }
+        else
+        {
+            clearInterval(MyTankV1.MyTankOpenFireInt);
+            MyTankV1.FirePostion[0]=-1;MyTankV1.FirePostion[1]=-1;
+        }
+    }
+    else if(Arm=="left")
+    {
+        if(MyTankV1.FirePostion[1]>0)
+        {
+            MyTankV1.FirePostion[1]=MyTankV1.FirePostion[1]-1;
+        }
+        else
+        {
+            clearInterval(MyTankV1.MyTankOpenFireInt);
+            MyTankV1.FirePostion[0]=-1;MyTankV1.FirePostion[1]=-1;
+        }
+    }
+    else if(Arm=="right")
+    {
+        if(MyTankV1.FirePostion[1]<9)
+        {
+            MyTankV1.FirePostion[1]=MyTankV1.FirePostion[1]+1;
+        }
+        else
+        {
+            clearInterval(MyTankV1.MyTankOpenFireInt);
+            MyTankV1.FirePostion[0]=-1;MyTankV1.FirePostion[1]=-1;
+        }
+    }
+    else if(Arm=="bottom")
+    {
+        if(MyTankV1.FirePostion[0]<19)
+        {
+            MyTankV1.FirePostion[0]=MyTankV1.FirePostion[0]+1;
+        }
+        else
+        {
+            clearInterval(MyTankV1.MyTankOpenFireInt);
+            MyTankV1.FirePostion[0]=-1;MyTankV1.FirePostion[1]=-1;
+        }
     }
     FaillTankV1Array();
 }
