@@ -38,6 +38,8 @@
     <Content Include="jquery-3.2.1.min.js" />
     <Content Include="Style.css" />
     <Content Include="Global.js" />
+    <Content Include="TankV1.js" />
+    <Content Include="index.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">

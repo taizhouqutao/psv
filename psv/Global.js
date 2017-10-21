@@ -1,5 +1,4 @@
-﻿jQuery(document).ready(function () {
-    var _TheArray = [
+﻿var _TheArray = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -20,7 +19,9 @@
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ]
+    ];
+jQuery(document).ready(function () {
+    Clean(_TheArray);
     ShowScreen(_TheArray);
     $('#Top_btn').bind('touchstart', Top);
     $('#Top_btn').bind('touchend', TopStop);
@@ -45,6 +46,15 @@ function Sound() {
 }
 function Reset() {
 
+}
+function Clean(array)
+{
+    for (var i = 0; i < array.length; i++)
+    {
+        for (var j = 0; j < array[i].length; j++) {
+            array[i][j]=0;
+        }
+    }
 }
 function ShowScreen(array) {
     var Invent = "";
