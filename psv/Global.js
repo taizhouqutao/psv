@@ -98,7 +98,7 @@ var Interval;
 var Changeval;
 function Top() {
     clearInterval(Interval);
-    Interval = setInterval("TankV1MainTop()", MyTankV1.MyTankV1Spead)
+    Interval = setInterval("TankV1MainTop()", MyTankV1.TankSpead)
 }
 function TopStop()
 {
@@ -106,28 +106,28 @@ function TopStop()
 }
 function Left() {
     clearInterval(Interval);
-    Interval = setInterval("TankV1MainLeft()", MyTankV1.MyTankV1Spead)
+    Interval = setInterval("TankV1MainLeft()", MyTankV1.TankSpead)
 }
 function LeftStop() {
     clearInterval(Interval);
 }
 function Right() {
     clearInterval(Interval);
-    Interval = setInterval("TankV1MainRight()", MyTankV1.MyTankV1Spead)
+    Interval = setInterval("TankV1MainRight()", MyTankV1.TankSpead)
 }
 function RightStop() {
     clearInterval(Interval);
 }
 function Bottom() {
     clearInterval(Interval);
-    Interval = setInterval("TankV1MainBottom()", MyTankV1.MyTankV1Spead)
+    Interval = setInterval("TankV1MainBottom()", MyTankV1.TankSpead)
 }
 function BottomStop() {
     clearInterval(Interval);
 }
 function Change() {
     clearInterval(Changeval);
-    Changeval = setInterval("TankV1Change()", MyTankV1.MyTankV1FireSpead)
+    Changeval = setInterval("TankV1Change()", MyTankV1.TankSpead)
 }
 function ChangeStop() {
     clearInterval(Changeval);

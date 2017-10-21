@@ -102,3 +102,47 @@ function TankV1MoveLeft(Tank) {
     }
     FaillTankV1Array();
 }
+//右按钮
+function TankV1MainRight() {
+    if(MyTankV1.Arm=="right")
+    {
+        TankV1MoveRight(MyTankV1)
+    }
+    else
+    {
+        TankV1TurnRight(MyTankV1)
+    }
+}
+function TankV1TurnRight(Tank) {
+    Tank.Arm="right";
+    FaillTankV1Array();
+}
+function TankV1MoveRight(Tank) {
+    if(Tank.Postion[1]<9)
+    {
+        Tank.Postion[1]=Tank.Postion[1]+1;
+    }
+    FaillTankV1Array();
+}
+//下按钮
+function TankV1MainBottom() {
+    if(MyTankV1.Arm=="bottom")
+    {
+        TankV1MoveBottom(MyTankV1)
+    }
+    else
+    {
+        TankV1TurnBottom(MyTankV1)
+    }
+}
+function TankV1TurnBottom(Tank) {
+    Tank.Arm="bottom";
+    FaillTankV1Array();
+}
+function TankV1MoveBottom(Tank) {
+    if(Tank.Postion[0]<19)
+    {
+        Tank.Postion[0]=Tank.Postion[0]-1;
+    }
+    FaillTankV1Array();
+}
