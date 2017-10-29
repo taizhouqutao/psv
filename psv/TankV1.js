@@ -1,13 +1,25 @@
 ﻿var MyTankV1;//我的坦克
+var MyTankV1Enemys;//敌人坦克
 function TankV1Main() {
+    MyTankV1Enemys={
+        MyTankV1EnemyStartPostion:[[1,1],[1,8],[18,1],[18,8]],
+        MyTankV1EnemyStartArm:["top","left","right","bottom"],
+        MyTankV1EnemyCount:20,
+        MyTankV1EnemySpeed:400,
+        MyTankV1EnemyFireSpead:50,
+        MyTankV1EnemyInt:-1,//绑定敌人和敌人活动
+        MyTankV1EnemyTank:[] //清空敌人数组
+    };//敌人坦克
     MyTankV1= {
         Postion: [8, 4],
         Arm: "top",
         FirePostion: [-1, -1],
         FireSpead: 40,
         TankSpead: 50,
-        MyTankOpenFireInt:-1
-    }
+        MyTankOpenFireInt:-1,
+    };
+    clearInterval(MyTankV1Enemys.MyTankV1EnemyInt);
+    MyTankV1Enemys.MyTankV1EnemyInt=setInterval("TankV1BindEnemy()",MyTankV1Enemys.MyTankV1EnemySpeed);
     FaillTankV1Array();
 }
 function FaillTankV1obj(Tank) {
@@ -55,6 +67,11 @@ function FaillTankV1Array()
     Clean(_TheArray);
     /*填充我的坦克*/
     FaillTankV1obj(MyTankV1);
+    /*填充敌人坦克*/
+    for(var i;i<MyTankV1Enemys.MyTankV1EnemyTank.length;i++)
+    {
+        FaillTankV1obj(MyTankV1Enemys.MyTankV1EnemyTank[i]);
+    }
     ShowScreen(_TheArray);
 }
 
@@ -150,6 +167,7 @@ function TankV1Change()
 {
     MyTankV1Fire(MyTankV1);
 }
+//我的坦克创建炮弹
 function MyTankV1Fire(Tank) {
     if(Tank.FirePostion[0]<0) {
         if(Tank.Arm=="top") {
@@ -186,6 +204,7 @@ function MyTankV1Fire(Tank) {
         }
     }
 }
+//我的坦克炮弹移动
 function MyTankV1MoveFire(Arm) {
     if(Arm=="top")
     {
@@ -236,4 +255,77 @@ function MyTankV1MoveFire(Arm) {
         }
     }
     FaillTankV1Array();
+}
+//创建敌人
+function TankV1BindEnemy() {
+    TankV1CreateEnemy();
+    TankV1EnemyMove();
+}
+function TankV1CreateEnemy() {
+    if(MyTankV1Enemys.MyTankV1EnemyTank.length>=4) return;
+    var EnemyTank={
+        Postion: MyTankV1Enemys.MyTankV1EnemyStartPostion[rd(0,3)], //敌人坦克位置
+        Arm: MyTankV1Enemys.MyTankV1EnemyStartArm[rd(0,3)], //敌人坦克瞄准
+        FirePostion: [-1, -1],
+        FireSpead: MyTankV1Enemys.MyTankV1EnemyFireSpead,
+        TankSpead: MyTankV1Enemys.MyTankV1EnemySpeed,
+        MyTankOpenFireInt:-1
+    };
+    //判断这个位置是否有障碍物
+    if(EnemyTank.Arm=="top")
+    {
+        if(_TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]]==0 && //身体
+            _TheArray[EnemyTank.Postion[0]-1][EnemyTank.Postion[1]]==0 && //炮管
+            _TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]-1]==0 && //左前
+            _TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]+1]==0 && //右前
+            _TheArray[EnemyTank.Postion[0]+1][EnemyTank.Postion[1]-1]==0 && //左后
+            _TheArray[EnemyTank.Postion[0]+1][EnemyTank.Postion[1]+1]==0 //右后
+        )
+        {
+            MyTankV1Enemys.MyTankV1EnemyTank.push(EnemyTank);
+        }
+    }
+    else if(EnemyTank.Arm=="left")
+    {
+        if(_TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]]==0 && //身体
+            _TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]-1]==0 && //炮管
+            _TheArray[EnemyTank.Postion[0]+1][EnemyTank.Postion[1]]==0 && //左前
+            _TheArray[EnemyTank.Postion[0]-1][EnemyTank.Postion[1]]==0 && //右前
+            _TheArray[EnemyTank.Postion[0]+1][EnemyTank.Postion[1]+1]==0 && //左后
+            _TheArray[EnemyTank.Postion[0]-1][EnemyTank.Postion[1]+1]==0 //右后
+        )
+        {
+            MyTankV1Enemys.MyTankV1EnemyTank.push(EnemyTank);
+        }
+    }
+    else if(EnemyTank.Arm=="right")
+    {
+        if(_TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]]==0 && //身体
+            _TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]+1]==0 && //炮管
+            _TheArray[EnemyTank.Postion[0]-1][EnemyTank.Postion[1]]==0 && //左前
+            _TheArray[EnemyTank.Postion[0]+1][EnemyTank.Postion[1]]==0 && //右前
+            _TheArray[EnemyTank.Postion[0]-1][EnemyTank.Postion[1]-1]==0 && //左后
+            _TheArray[EnemyTank.Postion[0]+1][EnemyTank.Postion[1]-1]==0 //右后
+        )
+        {
+            MyTankV1Enemys.MyTankV1EnemyTank.push(EnemyTank);
+        }
+    }
+    else if(EnemyTank.Arm=="bottom")
+    {
+        if(_TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]]==0 && //身体
+            _TheArray[EnemyTank.Postion[0]+1][EnemyTank.Postion[1]]==0 && //炮管
+            _TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]+1]==0 && //左前
+            _TheArray[EnemyTank.Postion[0]][EnemyTank.Postion[1]-1]==0 && //右前
+            _TheArray[EnemyTank.Postion[0]-1][EnemyTank.Postion[1]+1]==0 && //左后
+            _TheArray[EnemyTank.Postion[0]-1][EnemyTank.Postion[1]-1]==0 //右后
+        )
+        {
+            MyTankV1Enemys.MyTankV1EnemyTank.push(EnemyTank);
+        }
+    }
+    FaillTankV1Array();
+}
+function TankV1EnemyMove() {
+
 }
