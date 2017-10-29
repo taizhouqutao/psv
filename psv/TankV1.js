@@ -68,7 +68,7 @@ function FaillTankV1Array()
     /*填充我的坦克*/
     FaillTankV1obj(MyTankV1);
     /*填充敌人坦克*/
-    for(var i;i<MyTankV1Enemys.MyTankV1EnemyTank.length;i++)
+    for(var i=0;i<MyTankV1Enemys.MyTankV1EnemyTank.length;i++)
     {
         FaillTankV1obj(MyTankV1Enemys.MyTankV1EnemyTank[i]);
     }
