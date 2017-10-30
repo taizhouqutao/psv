@@ -1,15 +1,20 @@
 ﻿var MyTankV1;//我的坦克
-var MyTankV1Enemys;//敌人坦克
+var MyTankV1Enemys={
+    MyTankV1EnemyStartPostion:[[1,1],[1,8],[18,1],[18,8]],
+    MyTankV1EnemyStartArm:["top","left","right","bottom"],
+    MyTankV1EnemyCount:20,
+    MyTankV1EnemySpeed:400,
+    MyTankV1EnemyFireSpead:50,
+    MyTankV1EnemyInt:-1,//绑定敌人和敌人活动
+    MyTankV1EnemyTank:[] //清空敌人数组
+}//敌人坦克
 function TankV1Main() {
-    MyTankV1Enemys={
-        MyTankV1EnemyStartPostion:[[1,1],[1,8],[18,1],[18,8]],
-        MyTankV1EnemyStartArm:["top","left","right","bottom"],
-        MyTankV1EnemyCount:20,
-        MyTankV1EnemySpeed:400,
-        MyTankV1EnemyFireSpead:50,
-        MyTankV1EnemyInt:-1,//绑定敌人和敌人活动
-        MyTankV1EnemyTank:[] //清空敌人数组
-    };//敌人坦克
+    clearInterval(MyTankV1Enemys.MyTankV1EnemyInt);
+    MyTankV1Enemys.MyTankV1EnemyStartPostion=[[1,1],[1,8],[18,1],[18,8]];
+    MyTankV1Enemys.MyTankV1EnemyCount=20;
+    MyTankV1Enemys.MyTankV1EnemySpeed=400;
+    MyTankV1Enemys.MyTankV1EnemyFireSpead=50;
+    MyTankV1Enemys.MyTankV1EnemyTank=[]; //清空敌人数组
     MyTankV1= {
         Postion: [8, 4],
         Arm: "top",
@@ -18,7 +23,6 @@ function TankV1Main() {
         TankSpead: 50,
         MyTankOpenFireInt:-1,
     };
-    clearInterval(MyTankV1Enemys.MyTankV1EnemyInt);
     MyTankV1Enemys.MyTankV1EnemyInt=setInterval("TankV1BindEnemy()",MyTankV1Enemys.MyTankV1EnemySpeed);
     FaillTankV1Array();
 }
@@ -89,6 +93,13 @@ function TankV1MainTop() {
 function TankV1TurnTop(Tank) {
     Tank.Arm="top";
     FaillTankV1Array();
+}
+///检查内否转上
+function TankV1CheckTurnTop(Tank) {
+    if(Tank.Arm=="left")
+    {
+
+    }
 }
 function TankV1MoveTop(Tank) {
     if(Tank.Postion[0]>1)
@@ -327,5 +338,69 @@ function TankV1CreateEnemy() {
     FaillTankV1Array();
 }
 function TankV1EnemyMove() {
+    for(var i=0;i<MyTankV1Enemys.MyTankV1EnemyTank.length;i++)
+    {
+        var num = rd(0,100)
+        if(num<=60) //走直线
+        {
+            if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="top")
+            {
+                TankV1MoveTop(MyTankV1Enemys.MyTankV1EnemyTank[i])
+            }
+            else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="left")
+            {
+                TankV1MoveLeft(MyTankV1Enemys.MyTankV1EnemyTank[i])
+            }
+            else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="right")
+            {
+                TankV1MoveRight(MyTankV1Enemys.MyTankV1EnemyTank[i])
+            }
+            else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="bottom")
+            {
+                TankV1MoveBottom(MyTankV1Enemys.MyTankV1EnemyTank[i])
+            }
 
+        }
+        else {  //转弯
+            var newarm=MyTankV1Enemys.MyTankV1EnemyStartArm[rd(0,3)];
+            if(newarm!=MyTankV1Enemys.MyTankV1EnemyTank[i].Arm)
+            {
+                if(newarm=="top")
+                {
+                    TankV1TurnTop(MyTankV1Enemys.MyTankV1EnemyTank[i])
+                }
+                else if(newarm=="left")
+                {
+                    TankV1TurnLeft(MyTankV1Enemys.MyTankV1EnemyTank[i])
+                }
+                else if(newarm=="right")
+                {
+                    TankV1TurnRight(MyTankV1Enemys.MyTankV1EnemyTank[i])
+                }
+                else if(newarm=="bottom")
+                {
+                    TankV1TurnBottom(MyTankV1Enemys.MyTankV1EnemyTank[i])
+                }
+            }
+            else
+            {
+                if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="top")
+                {
+                    TankV1MoveTop(MyTankV1Enemys.MyTankV1EnemyTank[i])
+                }
+                else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="left")
+                {
+                    TankV1MoveLeft(MyTankV1Enemys.MyTankV1EnemyTank[i])
+                }
+                else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="right")
+                {
+                    TankV1MoveRight(MyTankV1Enemys.MyTankV1EnemyTank[i])
+                }
+                else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="bottom")
+                {
+                    TankV1MoveBottom(MyTankV1Enemys.MyTankV1EnemyTank[i])
+                }
+            }
+        }
+    }
 }
