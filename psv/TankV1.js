@@ -93,15 +93,8 @@ function TankV1TurnTop(Tank) {
     Tank.Arm="top";
     FaillTankV1Array();
 }
-///检查内否转上
-function TankV1CheckTurnTop(Tank) {
-    if(Tank.Arm=="left")
-    {
-
-    }
-}
 function TankV1MoveTop(Tank) {
-    if(Tank.Postion[0]>1)
+    if(TankV1CheckCanGo(Tank))
     {
         Tank.Postion[0]=Tank.Postion[0]-1;
     }
@@ -123,7 +116,7 @@ function TankV1TurnLeft(Tank) {
     FaillTankV1Array();
 }
 function TankV1MoveLeft(Tank) {
-    if(Tank.Postion[1]>1)
+    if(TankV1CheckCanGo(Tank))
     {
         Tank.Postion[1]=Tank.Postion[1]-1;
     }
@@ -145,7 +138,7 @@ function TankV1TurnRight(Tank) {
     FaillTankV1Array();
 }
 function TankV1MoveRight(Tank) {
-    if(Tank.Postion[1]<8)
+    if(TankV1CheckCanGo(Tank))
     {
         Tank.Postion[1]=Tank.Postion[1]+1;
     }
@@ -167,7 +160,7 @@ function TankV1TurnBottom(Tank) {
     FaillTankV1Array();
 }
 function TankV1MoveBottom(Tank) {
-    if(Tank.Postion[0]<18)
+    if(TankV1CheckCanGo(Tank))
     {
         Tank.Postion[0]=Tank.Postion[0]+1;
     }
@@ -266,6 +259,50 @@ function MyTankV1MoveFire(Arm) {
     }
     FaillTankV1Array();
 }
+//检查障碍物
+function TankV1CheckCanGo(Tank) {
+    if(Tank.Arm=="top")
+    {
+        if(Tank.Postion[0]>1 &&
+            _TheArray[Tank.Postion[0]-2][Tank.Postion[1]]==0 &&
+            _TheArray[Tank.Postion[0]-2][Tank.Postion[1]-1]==0 &&
+            _TheArray[Tank.Postion[0]-2][Tank.Postion[1]+1]==0)
+        {
+            return true;
+        }
+    }
+    else if(Tank.Arm=="left")
+    {
+        if(Tank.Postion[1]>1 &&
+            _TheArray[Tank.Postion[0]][Tank.Postion[1]-2]==0 &&
+            _TheArray[Tank.Postion[0]+1][Tank.Postion[1]-2]==0 &&
+            _TheArray[Tank.Postion[0]-1][Tank.Postion[1]-2]==0)
+        {
+            return true;
+        }
+    }
+    else if(Tank.Arm=="right")
+    {
+        if(Tank.Postion[1]<8 &&
+            _TheArray[Tank.Postion[0]][Tank.Postion[1]+2]==0 &&
+            _TheArray[Tank.Postion[0]+1][Tank.Postion[1]+2]==0 &&
+            _TheArray[Tank.Postion[0]-1][Tank.Postion[1]+2]==0)
+        {
+            return true;
+        }
+    }
+    else if(Tank.Arm=="bottom")
+    {
+        if(Tank.Postion[0]<18 &&
+            _TheArray[Tank.Postion[0]+2][Tank.Postion[1]]==0 &&
+            _TheArray[Tank.Postion[0]+2][Tank.Postion[1]+1]==0 &&
+            _TheArray[Tank.Postion[0]+2][Tank.Postion[1]-1]==0)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 //创建敌人
 function TankV1BindEnemy() {
     TankV1CreateEnemy();
@@ -343,20 +380,16 @@ function TankV1EnemyMove() {
         var num = rd(0,100)
         if(num<=60) //走直线
         {
-            if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="top")
-            {
+            if (MyTankV1Enemys.MyTankV1EnemyTank[i].Arm == "top" && TankV1CheckCanGo(MyTankV1Enemys.MyTankV1EnemyTank[i])) {
                 TankV1MoveTop(MyTankV1Enemys.MyTankV1EnemyTank[i])
             }
-            else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="left")
-            {
+            else if (MyTankV1Enemys.MyTankV1EnemyTank[i].Arm == "left" && TankV1CheckCanGo(MyTankV1Enemys.MyTankV1EnemyTank[i])) {
                 TankV1MoveLeft(MyTankV1Enemys.MyTankV1EnemyTank[i])
             }
-            else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="right")
-            {
+            else if (MyTankV1Enemys.MyTankV1EnemyTank[i].Arm == "right" && TankV1CheckCanGo(MyTankV1Enemys.MyTankV1EnemyTank[i])) {
                 TankV1MoveRight(MyTankV1Enemys.MyTankV1EnemyTank[i])
             }
-            else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="bottom")
-            {
+            else if (MyTankV1Enemys.MyTankV1EnemyTank[i].Arm == "bottom" && TankV1CheckCanGo(MyTankV1Enemys.MyTankV1EnemyTank[i])) {
                 TankV1MoveBottom(MyTankV1Enemys.MyTankV1EnemyTank[i])
             }
 
@@ -382,22 +415,17 @@ function TankV1EnemyMove() {
                     TankV1TurnBottom(MyTankV1Enemys.MyTankV1EnemyTank[i])
                 }
             }
-            else
-            {
-                if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="top")
-                {
+            else {
+                if (MyTankV1Enemys.MyTankV1EnemyTank[i].Arm == "top" && TankV1CheckCanGo(MyTankV1Enemys.MyTankV1EnemyTank[i])) {
                     TankV1MoveTop(MyTankV1Enemys.MyTankV1EnemyTank[i])
                 }
-                else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="left")
-                {
+                else if (MyTankV1Enemys.MyTankV1EnemyTank[i].Arm == "left" && TankV1CheckCanGo(MyTankV1Enemys.MyTankV1EnemyTank[i])) {
                     TankV1MoveLeft(MyTankV1Enemys.MyTankV1EnemyTank[i])
                 }
-                else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="right")
-                {
+                else if (MyTankV1Enemys.MyTankV1EnemyTank[i].Arm == "right" && TankV1CheckCanGo(MyTankV1Enemys.MyTankV1EnemyTank[i])) {
                     TankV1MoveRight(MyTankV1Enemys.MyTankV1EnemyTank[i])
                 }
-                else if(MyTankV1Enemys.MyTankV1EnemyTank[i].Arm=="bottom")
-                {
+                else if (MyTankV1Enemys.MyTankV1EnemyTank[i].Arm == "bottom" && TankV1CheckCanGo(MyTankV1Enemys.MyTankV1EnemyTank[i])) {
                     TankV1MoveBottom(MyTankV1Enemys.MyTankV1EnemyTank[i])
                 }
             }
