@@ -10,7 +10,6 @@ var MyTankV1Enemys={
 }//敌人坦克
 function TankV1Main() {
     clearInterval(MyTankV1Enemys.MyTankV1EnemyInt);
-    MyTankV1Enemys.MyTankV1EnemyStartPostion=[[1,1],[1,8],[18,1],[18,8]];
     MyTankV1Enemys.MyTankV1EnemyCount=20;
     MyTankV1Enemys.MyTankV1EnemySpeed=400;
     MyTankV1Enemys.MyTankV1EnemyFireSpead=50;
@@ -274,8 +273,9 @@ function TankV1BindEnemy() {
 }
 function TankV1CreateEnemy() {
     if(MyTankV1Enemys.MyTankV1EnemyTank.length>=4) return;
+    var rdPostions= rd(0,3);
     var EnemyTank={
-        Postion: MyTankV1Enemys.MyTankV1EnemyStartPostion[rd(0,3)], //敌人坦克位置
+        Postion: [MyTankV1Enemys.MyTankV1EnemyStartPostion[rdPostions][0],MyTankV1Enemys.MyTankV1EnemyStartPostion[rdPostions][1]], //敌人坦克位置
         Arm: MyTankV1Enemys.MyTankV1EnemyStartArm[rd(0,3)], //敌人坦克瞄准
         FirePostion: [-1, -1],
         FireSpead: MyTankV1Enemys.MyTankV1EnemyFireSpead,
