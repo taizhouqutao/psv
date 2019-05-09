@@ -173,7 +173,7 @@ function TankV1Change()
 //我的坦克创建炮弹
 function MyTankV1Fire(Tank) {
     if(Tank.FirePostion[0]<0) {
-        if(Tank.Arm=="top") {
+        if(Tank.Arm=="top") {  
             if((Tank.Postion[0]-1)>0) {
                 Tank.FirePostion[0] = (Tank.Postion[0]-1) - 1;
                 Tank.FirePostion[1] = Tank.Postion[1];
